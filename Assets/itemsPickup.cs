@@ -5,15 +5,15 @@ using UnityEngine;
 public class itemsPickup : MonoBehaviour
 {
     public items item;
+    public ParticleSystem particle;
     [SerializeField]
     float distance = 1f;
     public Transform player;
-    [SerializeField]
-    ParticleSystem CollectParticle;
     private void Start()
     {
-        CollectParticle.Stop();
+        particle.Stop();
         GameManager.instance.onItemsChanged += onItemsChanged;
+        
     }
     void FixedUpdate()
     {
@@ -31,6 +31,8 @@ public class itemsPickup : MonoBehaviour
 
         if (wasPickedUp)
         {
+            particle.Play();
+            StartCoroutine(stopParticle());
             Destroy(gameObject);
             return;
         }
@@ -38,11 +40,16 @@ public class itemsPickup : MonoBehaviour
 
     void onItemsChanged()
     {
-        CollectParticle.Play();
-        CollectParticle.Stop();
         if (GameManager.instance.items.Count == 4)
         {
             GameManager.instance.GameEnd();
         }
+    }
+
+
+    IEnumerator stopParticle()
+    {
+        yield return new WaitForSeconds(.4f);
+        particle.Stop();
     }
 }
