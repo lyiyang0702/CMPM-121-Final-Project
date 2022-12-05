@@ -11,6 +11,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+
+    [SerializeField] private AudioSource[] FootstepSoundEffects;
+    private int FootstepSoundEffectIndex = 0;
+    [SerializeField] private int FootstepSoundDelay = 10; // change the amount of frames waited between footstep sounds
+    private int FootstepSoundDelayIndex = 0; 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,24 @@ public class PlayerController : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            // play sounds 
+            if (!FootstepSoundEffects[FootstepSoundEffectIndex].isPlaying) {
+                
+                if (FootstepSoundDelay > FootstepSoundDelayIndex) {
+                    FootstepSoundDelayIndex ++;
+                } else {
+                    
+                    FootstepSoundEffectIndex ++;
+                    FootstepSoundDelayIndex = 0;
+
+                    if (FootstepSoundEffectIndex >  4) {
+                        FootstepSoundEffectIndex = 0;
+                    }
+
+                    FootstepSoundEffects[FootstepSoundEffectIndex].Play();
+                }
+            }
         }
     }
 
