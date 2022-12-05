@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public List<items> items = new List<items> ();
     public delegate void OnItemsChanged();
     public OnItemsChanged onItemsChanged;
+    public Animator animator;
     public bool Add(items item)
     {
         if (onItemsChanged != null)
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             items.Add(item);
             return true;
+
         }
 
         return false;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd()
     {
+        animator.SetBool("open", true);
         Debug.Log("Game End");
         // call game end scene if we have one
     }
