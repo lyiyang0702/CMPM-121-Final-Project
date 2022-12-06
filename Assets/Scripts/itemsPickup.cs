@@ -9,6 +9,12 @@ public class itemsPickup : MonoBehaviour
     [SerializeField]
     float distance = 1f;
     public Transform player;
+
+    [SerializeField] private AudioSource doorUnlock;
+    [SerializeField] private AudioSource doorCreak;
+    [SerializeField] private AudioSource pickup;
+
+
     private void Start()
     {
         particle.Stop();
@@ -31,6 +37,7 @@ public class itemsPickup : MonoBehaviour
 
         if (wasPickedUp)
         {
+            pickup.Play();
             particle.Play();
             StartCoroutine(stopParticle());
             Destroy(gameObject);
@@ -43,6 +50,8 @@ public class itemsPickup : MonoBehaviour
         if (GameManager.instance.items.Count == 4)
         {
             GameManager.instance.GameEnd();
+            doorCreak.Play();
+            doorUnlock.Play();
         }
     }
 
