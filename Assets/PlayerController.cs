@@ -15,8 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource[] FootstepSoundEffects;
     private int FootstepSoundEffectIndex = 0;
     [SerializeField] private int FootstepSoundDelay = 10; // change the amount of frames waited between footstep sounds
-    private int FootstepSoundDelayIndex = 0; 
-
+    private int FootstepSoundDelayIndex = 0;
 
     // Start is called before the first frame update
     void Start()
