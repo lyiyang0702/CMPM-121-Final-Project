@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         animator.SetBool("open", true);
         Debug.Log("Game End");
+        Application.Quit();
         // call game end scene if we have one
     }
 

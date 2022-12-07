@@ -47,7 +47,9 @@ public class itemsPickup : MonoBehaviour
 
     void onItemsChanged()
     {
-        if (GameManager.instance.items.Count == 4)
+        int itemCount = GameManager.instance.items.Count;
+        UIScript.instance.ChangeText(itemCount + 1);
+        if ( itemCount == 4)
         {
             GameManager.instance.GameEnd();
             doorCreak.Play();
