@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     {
         animator.SetBool("open", true);
         Debug.Log("Game End");
-        Application.Quit();
         // call game end scene if we have one
     }
 
